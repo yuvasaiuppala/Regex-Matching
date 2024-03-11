@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Regex Matching and Email Validation</h1>
+
+    
+    <form action="/regex_results" method="post">
+        Test String:    <label for="test_string">
+                        <input type="text" id="test_string" name="test_string" required>
+                        <br>
+        Regex Pattern:  <label for="regex_pattern"></label>
+                        <input type="text" id="regex_pattern" name="regex_pattern" required>
+                        <br>
+                        <button type="submit">Match Regex</button>
+    </form>
+
+
+    <form action="/email_validation" method="post" >
+        Email:  <label for="email">
+                <input type="text" id="email" name="email" required>
+                <br>
+                <button type="submit">Validate Email</button>
+    </form>
+
+    {% if test_string and regex_pattern %}
+        <h2>Regex Matcher</h2>
+        {% if regex_matches %}
+            <h4>Regex Matches</h4>
+            <ul>
+                {% for match in regex_matches %}
+                    <li>{{ match }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No regex matches found.</p>
+        {% endif %}
+    {% endif %}
+
+    {% if email %}
+        <h2>Email Validation</h2>
+        <p>Email: {{ email }}</p>
+        {% if is_valid_email %}
+            <p style="color: rgb(14, 231, 115);">Valid Email Address</p>
+        {% else %}
+            <p style="color: rgb(237, 16, 38);">Invalid Email Address</p>
+        {% endif %}
+    {% endif %}
+
+    
+</body>
+</html>
